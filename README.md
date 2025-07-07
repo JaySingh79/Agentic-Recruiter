@@ -8,7 +8,7 @@ A modular, LLM-powered interview system that reads a **job description** and a *
 
 - 🔍 Parses resume & job description
 - 🧠 Skill matching using semantic similarity
-- ❓ One-shot generation of 5 technical questions using GPT-4o-mini
+- ❓ Technical interview questions powered GPT-4o-mini(or any llm of your choice)
 - 🔁 Contextual follow-up questions based on candidate’s answers
 - 📝 Real-time feedback with hidden scoring (stored server-side)
 - 🗂️ Session memory using FastAPI (easily extendable to Redis)
@@ -29,10 +29,16 @@ git clone https://github.com/your-org/agentic_recruiter.git
 cd agentic_recruiter
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
-
+```
+```bash
 export OPENAI_API_KEY="your-key-here"
+```
 
+```bash
+uvicorn backend.orchestrator:app --reload
+```
+
+```bash
 streamlit run frontend/streamlit_app.py
 ```
 
