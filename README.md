@@ -7,7 +7,7 @@ A modular, LLM-powered interview system that reads a **job description** and a *
 ## ✨ Features
 
 - 🔍 Parses resume & job description
-- 🧠 Enhanced **skill extraction** from JD/Resume and **matching** using semantic similarity cosine threshold for finding exact and very similar matches. 
+- 🧠 Enhanced **skill extraction** from JD/Resume and **matching** using semantic similarity cosine threshold for finding exact and very similar matches, powered by **Gemini 2.5 Flash**. 
 - ❓ Technical interview questions powered GPT-4o-mini(or any llm of your choice) varying with the depth of candidate's experience.
 - 🔁 Contextual follow-up questions based on candidate’s answers
 - 📝 Real-time feedback with hidden scoring (stored server-side)
@@ -32,6 +32,7 @@ pip install -r requirements.txt
 ```
 ```bash
 export OPENAI_API_KEY="your-key-here"
+export GEMINI_API_KEY="your-key-here"
 ```
 
 ```bash
