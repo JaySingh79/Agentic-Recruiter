@@ -7,8 +7,8 @@ A modular, LLM-powered interview system that reads a **job description** and a *
 ## ✨ Features
 
 - 🔍 Parses resume & job description
-- 🧠 Skill matching using semantic similarity
-- ❓ Technical interview questions powered GPT-4o-mini(or any llm of your choice)
+- 🧠 Enhanced **skill extraction** from JD/Resume and **matching** using semantic similarity cosine threshold for finding exact and very similar matches. 
+- ❓ Technical interview questions powered GPT-4o-mini(or any llm of your choice) varying with the depth of candidate's experience.
 - 🔁 Contextual follow-up questions based on candidate’s answers
 - 📝 Real-time feedback with hidden scoring (stored server-side)
 - 🗂️ Session memory using FastAPI (easily extendable to Redis)
