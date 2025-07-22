@@ -149,13 +149,15 @@ async def status_check():
     
 @app.post('/interview/plan')
 async def plan_interview(payload: StartPayload):
-    jd_struct = await parse_inputs.parse_jd(payload.job_description)
-    res_skills, experience = await parse_inputs.parse_resume_text(payload.resume)
-    matches = await match_skills(jd_struct, res_skills)
+    # jd_struct = await parse_inputs.parse_jd(payload.job_description)
+    jd_skills = await parse_inputs.parse_jd(payload.job_description)
+    # res_skills, experience = await parse_inputs.parse_resume_text(payload.resume)
+    res_skills = await parse_inputs.parse_resume_text(payload.resume)
+    matched_skills = await match_skills(jd_skills, res_skills)
     # plan = create_plan(matches, res_struct['experience'])
     return {
-        'skills': list(matches.keys()),
-        'experience': experience
+        'skills': matched_skills,
+        # 'experience': experience
     }
 
 
@@ -164,7 +166,7 @@ async def plan_interview(payload: StartPayload):
 async def start_interview(payload: StartPayload):
     # 1. Parse JD & resume
     jd_struct = await parse_inputs.parse_jd(payload.job_description)
-    res_skills, experience = await parse_inputs.parse_resume_text(payload.resume)
+    res_skills = await parse_inputs.parse_resume_text(payload.resume)
 
     # 2. Extract and match skills
     # jd_skills = jd_struct

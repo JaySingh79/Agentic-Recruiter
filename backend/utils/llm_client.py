@@ -15,10 +15,10 @@ async def call_llm(prompt: str) -> str:
     
     return response.choices[0].message.content
 
-async def main():
-    print("Answer is coming..\n")
-    result = await call_llm("Give me 5 best pdf parsing methods. Keep it short. Write in bullet points")
-    print(result)
+# async def main():
+#     print("Answer is coming..\n")
+#     result = await call_llm("Give me 5 best pdf parsing methods. Keep it short. Write in bullet points")
+#     print(result)
 
 
-asyncio.run(main())
+# asyncio.run(main())
