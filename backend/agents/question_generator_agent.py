@@ -27,7 +27,7 @@ async def generate_questions(jd: str, common_skills: list) -> list[str]:
                 Here are the job-description: {jd}
                 Here is a candidate's skill profile: {common_skills}
 
-                Generate 6 interview questions covering key technical concepts involved in job-description. Out of these atleast 2 questions should cover practical implementation of those technical skills.
+                Generate new 6 interview questions covering key technical concepts involved in job-description. Out of these atleast 2 questions should cover practical implementation of those technical skills.
 
                 Return only the list of questions.
             """

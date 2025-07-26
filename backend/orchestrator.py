@@ -175,7 +175,7 @@ async def start_interview(payload: StartPayload):
 
     # 3. Generate 5 main questions in one LLM call
     from agents.question_generator_agent import generate_questions
-    questions = await generate_questions(jd=payload.job_description, common_skills=[item for item in matches.values() if item is not None])
+    questions = await generate_questions(jd=payload.job_description, common_skills=matches)
 
     # 4. Create a session with full tracking info
     sid = str(uuid.uuid4())
@@ -205,11 +205,10 @@ async def submit_answer(payload: AnswerPayload):
         raise HTTPException(status_code=404, detail="Invalid session_id")
     q_list = session["questions"]
 
-    # --------------------------------------------
     # CASE A: We are waiting for a follow‑up reply
-    # --------------------------------------------
+
     if session["awaiting_followup"]:
-        main_q   = session["last_main_question"]
+        main_q = session["last_main_question"]
         follow_q = q_list[session["idx"]]  # not used, but could log
         # store follow‑up interaction
         await store_interaction(
@@ -228,9 +227,8 @@ async def submit_answer(payload: AnswerPayload):
         next_q = None if done else q_list[session["idx"]]
         return {"done": done, "next_question": next_q, "follow_up": False}
 
-    # --------------------------------------------
     # CASE B: Answer to a main question
-    # --------------------------------------------
+
     idx      = session["idx"]
     question = q_list[idx]
 
@@ -238,7 +236,9 @@ async def submit_answer(payload: AnswerPayload):
     needs_fup   = eval_result[0].get("needs_followup", False)
     feedback    = eval_result[0].get("feedback", "")
 
-    # ---------- (B1) Needs follow‑up -------------
+
+    #(B1) Needs follow‑up
+    
     if needs_fup:
         follow_prompt = f"""
                 You are a senior interviewer.
@@ -256,7 +256,7 @@ async def submit_answer(payload: AnswerPayload):
 
         return {"done": False, "next_question": follow_up_q, "feedback": feedback, "follow_up": True}
 
-    # ---------- (B2) No follow‑up → move on ------
+    # (B2) No follow‑up → move on
     await store_interaction(session['jd'], session['res'], question, payload.answer, eval_result, is_followup=False)
     session["idx"] += 1
 
