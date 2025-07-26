@@ -1,3 +1,5 @@
-.env
 ai_recruiter
+.env
 __pycache__/
+backend\__pycache__/
+app.log
