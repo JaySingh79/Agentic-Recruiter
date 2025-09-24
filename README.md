@@ -1,4 +1,4 @@
-# 🧠 Agentic Recruiter
+# ConvoHire - Agentic Recruiter
 
 A modular, LLM-powered interview system that reads a **job description** and a **candidate resume**, then conducts a five-question technical interview with smart follow-ups, real-time feedback, and backend evaluation.
 
